@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+#include <algorithm>
+using namespace std;
+
+vector<int> LeftRotateDplaces(vector<int> &arr, int d, int n)
+{
+    d = d % n;
+    vector<int> temp;
+    for (int i = 0; i < d; i++)
+    {
+        temp.push_back(arr[i]); // Pushing first d elements into temporary array
+    }
+
+    for (int i = d; i < n; i++)
+    {
+        arr[i - d] = arr[i];
+    }
+    // Left shifting array by d places
+
+    for (int i = (n - d); i < n; i++)
+    { // Shifting temporary array value to original array.
+        arr[i] = temp[i - (n - d)];
+    }
+
+    return arr;
+}
+
+
+
+//-------------------------------------------------Optimal Solution----------------->
+
+void LeftRotateDplacesOptimal(int arr[], int d, int n){
+     
+    reverse(arr, arr + d);
+    reverse(arr + d, arr + n);
+    reverse(arr, arr + n);
+
+}
+
+int main()
+
+{
+     int n;
+     cin>>n;
+
+     vector <int> arr(n);
+     for (int i = 0; i< n; i+=){
+        cin>>arr[i];
+     }
+
+     LeftRotateDplaces(arr,3,7);
+
+    return 0;
+}
