@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+//----------------------------------------Better Sol------------------------------>
+int MaxuimuSubarraySum(vector<int> &arr, int n)
+{
+
+    long long maximum = LONG_MIN;
+
+    for (int i = 0; i < n; i++)
+    {
+        long long sum = 0;
+        for (int j = i; j < n; j++)
+        {
+            sum += arr[j];
+            maximum = max(sum, maximum);
+        }
+    }
+    return maximum;
+}
+
+//----------------------------------------------Brute Force---------------------------->
+
+int MaxSubarray(vector<int> &arr, int n)
+{
+    long long maximum = LONG_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        long long sum = 0;
+
+        for (int j = i; i < n; i++)
+        {
+            for (int k = i; k < j; k++)
+            {
+                sum += arr[k];
+                maximum = max(sum, maximum);
+            }
+        }
+    }
+    return maximum;
+}
+
+
+//-------------------------------------------->Optimal ---- Kadanes Algo
+int MaxSub(vector <int> &arr, int n){
+
+    long long maximum = LONG_MIN;
+    long long sum = 0;
+    int arr_start = 0;
+    int arr_end = 0;
+    int start = 0;
+
+    for(int i = 0; i<n; i++){
+        sum += arr[i];
+
+        if(sum == 0){+
+            start= i;
+        }
+
+        if(sum > maximum){
+            maximum = sum;
+            arr_start = start;
+            arr_end = i;
+
+        }
+
+        if(sum<0){
+            sum = 0;
+        }
+
+
+        if(maximum <0){
+            return 0;
+        }
+
+    }
+    return maximum;
+
+    
+
+}
+
+
+    int main()
+{
+
+    return 0;
+}
