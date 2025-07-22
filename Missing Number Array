@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+//--------------------------------------------Brute Force Sol----------------------------------------->
+
+int Missing(vector<int> &arr, int n)
+{
+    // Linear Search
+
+    for (int i = 0; i < n; i++)
+    {
+        int flag = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (arr[j] == arr[i])
+            {
+                flag = 1;
+                break;
+            }
+        }
+
+        if (flag == 0)
+        {
+            return arr[i];
+        }
+    }
+    return -1;
+}
+
+
+//-------------------------------Better Solution--------------------------->
+
+int Missing2(vector <int> &arr, int n){
+    int hash[n+1] = {0};
+    for(int i = 0; i<n; i++){
+        hash[arr[i]] = 1;
+    }
+
+    for(int i = 0; i<n; i++){
+        if(hash[i] == 0){
+            return i;
+        }
+    }
+}
+
+
+//------------------------------Optimal solution------------------------>
+
+int Missing3(vector <int> &arr, int n){
+    int XOR1 = 0;
+    int XOR2 = 0;
+
+    for(int i =0; i<n; i++){
+        XOR2 = XOR2 ^ arr[i];
+        XOR1 = XOR1 ^ (i+1);
+    }
+     XOR1 = XOR1 ^ n;
+     return XOR1 ^ XOR2;
+
+
+}
+
+int main()
+{
+
+
+    int n;
+     cin>>n; 
+
+     vector <int> arr(n);
+     for(int i = 0; i<n; i++){
+        cin>>arr[i];
+     }
+
+
+     
+
+
+    return 0;
+}
