@@ -1,0 +1,117 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+
+//First case----------------------Equal number of positives and negetives-------------Brute Force
+
+
+vector <int> Rearrange(vector<int> &arr, int n){
+    vector <int> Pos, Neg;
+    for(int i =0; i<n; i++){
+        if(arr[i] >0){
+            Pos.push_back(arr[i]);
+        }
+
+        else{
+            Neg.push_back(arr[i]);
+        }
+    }
+
+    for(int i = 0; i<n/2; i++){
+        arr[2*i] = Pos[i];
+        arr[2*i+1] = Neg[i];
+    }
+    return arr;
+}
+
+
+vector <int> Rearrange2(vector<int>&arr, int n){
+    vector <int> ans;
+    int pos_indx = 0;
+    int neg_indx = 1;
+
+    for(int i = 0; i<n; i++){
+        if(arr[i] <0){
+            ans[neg_indx] = arr[i];
+            neg_indx += 2;
+        }
+        else{
+            ans[pos_indx] = arr[i];
+            pos_indx += 2;
+        }
+    }
+    return arr;
+}
+
+
+
+// 2nd case if array elements of positive and negetive are not equal then Go back to the Brute Force solution
+
+vector <int> RearrangeCase2(vector<int>&arr, int n){
+    vector<int> Pos, Neg;
+    for(int i = 0; i<n; i++){
+        if(arr[i] >0){
+            Pos.push_back(arr[i]);
+        }
+        else{
+            Neg.push_back(arr[i]);
+        }
+    }
+
+    if(Pos.size() > Neg.size()){
+
+    
+
+    for(int i = 0; i<Neg.size(); i++){
+        arr[2*i] = Pos[i];
+        arr[2*i+1] = Neg[i];
+    }
+
+    int index = Neg.size()*2;
+    for(int i = Neg.size(); i< Pos.size(); i++){
+        arr[index] = Pos[i];
+        index++;
+    }
+
+
+}
+
+else{
+    
+    int index = Pos.size()*2;
+    for(int i = Pos.size(); i< Neg.size(); i++){
+        arr[index] = Neg[i];
+        index++;
+    }
+
+
+}
+
+return arr;
+
+    
+}
+
+int main(){
+
+    int n;
+    cout<<"Enter size: ";
+    cin>>n;
+
+    vector <int> arr(n);
+    cout<<"Enter the array: ";
+    for(int i = 0; i<n; i++){
+        cin>>arr[i];
+    }
+
+    Rearrange(arr, n);
+
+    cout<<"Sorted Array: ";
+    for(int i = 0; i<n; i++){
+        cout<<arr[i];
+    }
+    
+    return 0;
+}
