@@ -1,0 +1,12 @@
+for (int i = 1; i <= n; i++) {
+    // Now i is the number itself, not an index
+    if (i % 3 == 0 && i % 5 == 0) {
+        answer.push_back("FizzBuzz");
+    } else if (i % 3 == 0) {
+        answer.push_back("Fizz");
+    } else if (i % 5 == 0) {
+        answer.push_back("Buzz");
+    } else {
+        answer.push_back(to_string(i)); // convert number to string
+    }
+}
