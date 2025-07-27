@@ -1,0 +1,48 @@
+class Solution {
+public:
+
+   bool IsAlphaNumeric(char b){
+    return (b >= 'A' && b <= 'Z')||
+           (b >= 'a' && b <= 'z')||
+           (b >= '0' && b <= '9');
+   }
+
+
+   char toLower(char b){
+    if(b >= 'A' && b <= 'Z'){     // Every ASCII value have a gap of 32
+        return b + ('b'- 'B');
+    }
+
+    return b;      // It is already lower case
+   }
+
+
+   
+    bool isPalindrome(string s) {
+        
+        // Take 2 Pointers
+
+        int i = 0;
+        int j = s.length() - 1;
+
+
+        while(i < j ){
+            while(i < j && !IsAlphaNumeric(s[i])){
+                i++;
+            }
+
+            while(j > i && !IsAlphaNumeric(s[j])){
+                j--;
+            }
+
+            if(toLower(s[i]) !=toLower(s[j])){
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+};
