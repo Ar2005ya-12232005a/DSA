@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> coins(n);
+    int total = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> coins[i];
+        total += coins[i];
+    }
+    
+    sort(coins.rbegin(), coins.rend()); // sort in descending order
+    
+    int taken_sum = 0, count = 0;
+    for (int value : coins) {
+        taken_sum += value;
+        count++;
+        if (taken_sum > total - taken_sum) {
+            cout << count;
+            return 0;
+        }
+    }
+}
