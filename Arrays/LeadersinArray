@@ -4,6 +4,32 @@
 #include <algorithm>
 using namespace std;
 
+
+vector<int> Leader2(vector <int> &arr){
+    int n = arr.size();
+    
+    vector<int> answer;
+
+    for(int i=0; i<n; i++){
+        bool isLeader = true;
+        for(int j = i+1; j<n; j++){  // This will check if any right elements are greater;
+            if(arr[i] <= arr[j]){
+                isLeader = false;
+                break;
+                
+            }   // bool checks i fthere is any greter element to the right, if yes then will become false and if not remains true;
+
+        }
+
+        if(isLeader){
+            answer.push_back(arr[i]);
+        }
+    }
+
+    return answer;
+
+// Optimal sol
+
 vector<int> Leader(vector <int> &arr){
     int n = arr.size();
     int maxi = INT_MIN;
