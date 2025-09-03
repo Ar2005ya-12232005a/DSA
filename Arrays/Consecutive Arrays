@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+int Consequetives(vector<int> &arr){
+    int n =  arr.size();
+    int Last_smaller = INT_MIN;
+    int longest = 1;
+    int cntCurr = 0;
+
+    sort(arr.begin(),arr.end());
+
+    for(int i = 0; i<n; i++){
+        if(arr[i]-1 ==  Last_smaller){
+            cntCurr++;
+            Last_smaller = arr[i];
+        }
+        
+        else if(arr[i] != Last_smaller){
+            cntCurr = 1;
+            Last_smaller = arr[i];
+        }
+
+        longest = max(longest, cntCurr);
+    }
+    return longest;
+}
+
+
+int Consequetive2(vector <int> &arr){
+    int longest = 1;
+    int n = arr.size();
+    
+    unordered_set <int> st;
+    for(int i = 0; i<n; i++){
+        st.insert(arr[i]);
+    }
+
+    for(auto it: st){
+        if(st.find(it -1) == st.end()){
+            int cnt = 1;
+            int x = it;
+            while(st.find(x+1) != st.end()){
+                x+=1;
+                cnt+=1;
+
+            }
+            longest = max(longest,cnt);
+        }
+
+    }
+    return longest;
+        
+    
+
+    
+}
+
+int main(){
+
+    int n;
+    cout<<"Enter the size: ";
+    cin>>n;
+
+    vector<int> arr(n);
+    cout<<"Enter the array: ";
+    for(int i = 0; i<n; i++){
+        cin>>arr[i];
+    }
+
+    int ans = Consequetives(arr);
+    cout<<"Longest is: "<<ans<<endl;
+    
+    return 0;
+}
