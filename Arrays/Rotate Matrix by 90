@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+#include <algorithm>
+using namespace std;
+
+// BRUTE fORCE------------------------
+vector <vector <int>> RotateMatrix(vector <vector<int>> &matrix, int rows, int cols){
+    int n = matrix.size();
+
+    vector <vector<int>> ans(rows,vector <int>(cols));
+    for(int i = 0 ;i<rows; i++){
+        for(int j = 0; j<cols; j++){
+            ans[n-1-i][j] = matrix[i][j];
+        }
+    }
+    return ans;
+}
+
+// Optmised--------------------
+
+vector <vector <int>> RotateMatrix2(vector <vector <int>> &matrix, int rows, int cols){
+    // Transposing matrix
+    int n = matrix.size();
+    for(int i = 0; i<n-2; i++){
+        for(int j = i+1; j<n-1; j++){
+            swap(matrix[i][j], matrix[j][i]);
+        }
+
+        
+    }
+
+
+    for(int i = 0; i<rows; i++){
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+    return matrix;
+
+    
+}
+
+int main(){
+
+    int rows, cols;
+    cout<<"Enter the rows and columns: ";
+    cin>>rows>>cols;
+
+
+    vector <vector<int>> matrix(rows,vector<int> (cols));
+
+    for(int i =0; i<rows; i++){
+        for(int j = 0; j<cols; j++){
+            cin>> matrix[i][j];
+        }
+    }
+
+    cout << "Rotated Matrix (Brute force):\n";
+    auto rotated = RotateMatrix(matrix, rows, cols);
+    for(auto &row : rotated) {
+        for(auto &x : row) cout << x << " ";
+        cout << "\n";
+    }
+
+    if(rows == cols) {
+        cout << "Rotated Matrix (Optimized):\n";
+        auto rotated2 = RotateMatrix2(matrix, rows);
+        for(auto &row : rotated2) {
+            for(auto &x : row) cout << x << " ";
+            cout << "\n";
+        }
+    } else {
+        cout << "Optimized method only works for square matrices.\n";
+    }
+
+
+
+    
+    return 0;
+}
