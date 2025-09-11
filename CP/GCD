@@ -1,0 +1,78 @@
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     int n1, n2, gcd = 1;
+//     cin >> n1 >> n2;
+
+//     for (int i = 1; i <= min(n1, n2); i++) {
+//         if (n1 % i == 0 && n2 % i == 0) {
+//             gcd = i; // Store the largest common divisor
+//         }
+//     }
+
+//     cout << "GCD: " << gcd << endl;
+//     return 0;
+// }
+
+
+// #include <iostream>
+// using namespace std;
+
+// int main(){
+//     int n1 , n2 , gcd;
+//     cin>>n1>>n2;
+
+//     for(int i = min(n1,n2); i>=1; i--){
+//         if(n1%i == 0 && n2%i == 0){
+//             gcd = i;
+//             break;
+//         }
+
+        
+//     }
+//     cout<<gcd<<endl;
+
+//     return 0;
+// }
+
+// Euclidean algorithm
+
+#include <iostream>
+using namespace std;
+
+void Euclidean(int a , int b){
+    int gcd = 0;
+    while(a>0 && b>0){
+        if (a>b){
+            a = a%b;
+       
+        }else {
+            b = b%a;
+        }
+
+        if (a==0){
+            gcd = b;
+
+        }else{
+            gcd = a;
+        }
+    }
+    cout<<"The gcd is: "<<gcd<<endl;
+}
+
+int main(){
+
+    int m , n ;
+    cout<<"Enter value of m: ";
+    cin>>m;
+    cout<<"Enter the value of n: ";
+    cin>>n;
+
+    Euclidean(m,n);
+    
+
+
+
+    return 0;
+}
