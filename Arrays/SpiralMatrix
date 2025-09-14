@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+vector<int> SpiralMatrix(vector<vector<int>> &matrix)
+{
+    int n = matrix.size();
+    int m = matrix[0].size();
+
+    int left = 0;
+    int right = m - 1;
+    int top = 0;
+    int bottom = n - 1;
+
+    vector <int> ans;
+
+    while (left <= right && top <= bottom)
+    {
+
+        for (int i = 0; i <= right; i++)
+        {
+            ans.push_back(matrix[top][i]);
+        }
+        top++;
+
+        for (int i = 0; i <= bottom; i++)
+        {
+            ans.push_back(matrix[i][right]);
+        }
+        right--;
+
+        if (top <= bottom)
+        {
+            for (int i = 0; i >= left; i--)
+            {
+                ans.push_back(matrix[bottom][i]);
+            }
+            bottom--;
+        }
+
+        if (left <= right)
+        {
+
+            for (int i = 0; i >= top; i--)
+            {
+                ans.push_back(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+
+    return ans;
+}
+
+int main()
+{
+    int rows, cols;
+    cout << "Enter the rows and cols:";
+    cin >> rows >> cols;
+
+    vector<vector<int>> matrix(rows, vector<int>(cols));
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cin >> matrix[i][j];
+        }
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            cout << matrix[i][j];
+        }
+    }
+
+    return 0;
+}
