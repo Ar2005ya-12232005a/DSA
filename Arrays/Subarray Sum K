@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+//---------------------------> Brute Force
+
+int SubarrayK(vector <int> &arr, int k){
+    int n = arr.size();
+    int count = 0;
+    for(int i = 0; i< n; i++){
+        for(int j = i; j<n; j++){
+            int sum = 0;
+            for(int k = i; k< j; k++){
+                sum = sum + arr[k];
+
+                if(sum == k){
+                    count ++;
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
+int SubarrayK2(vector <int> &arr, int k){
+    int n = arr.size();
+    int count = 0;
+    for(int i = 0; i<n ;i++){
+        int sum = 0;
+
+        for(int j = i; j< n; j++){
+
+            sum = sum + arr[j];
+
+            if(sum == k){
+                count++;
+            }
+
+        }
+
+    }
+
+    return count;
+}
+
+
+
+int SubarrayK3(vector <int>&arr, int k){
+    int n = arr.size();
+    map<int, int> mpp;
+    mpp[0] = 1;
+
+    int preSum = 0;
+    int count = 0;
+
+    for(int i = 0; i<n; i++){
+
+        preSum = preSum + arr[i];
+
+        int remove = preSum - k;
+        count += mpp[remove];
+        mpp[preSum]++;
+
+    }
+
+    return count;
+}
+
+int main(){
+    vector<int> arr = {1, 2, 3, -1, 2};
+    int k = 3;
+
+    cout << "Brute force count: " << SubarrayK(arr, k) << endl;
+    cout << "Better count: " << SubarrayK2(arr, k) << endl;
+    cout << "Optimal count: " << SubarrayK3(arr, k) << endl;
+
+    return 0;
+
+   
+}
