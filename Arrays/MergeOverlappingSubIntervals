@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+#include <algorithm>
+
+
+using namespace std;
+
+
+//--------------------------------BRUTE----------------------------------
+vector<vector<int>> MergeIntervalsOverlapp(vector<vector<int>> &nums) {
+    int n = nums.size();
+    vector<vector<int>> ans;
+
+    sort(nums.begin(), nums.end());
+
+    for (int i = 0; i < n; i++) {
+        int start = nums[i][0];
+        int end = nums[i][1];
+
+        if (!ans.empty() && start <= ans.back()[1]) {
+            // Merge with the last interval if overlapping
+            ans.back()[1] = max(ans.back()[1], end);
+        } else {
+            // Otherwise, add as a new interval
+            ans.push_back({start, end});
+        }
+    }
+
+    return ans;
+}
+
+
+
+//------------------------------OPTIMAL-----------------------
+
+
+vector<vector<int>> MergeIntervalsOverlapp2(vector<vector<int>> &nums) {
+    int n = nums.size();
+    vector<vector<int>> ans;
+
+    // Always sort intervals first
+    sort(nums.begin(), nums.end());
+
+    for (int i = 0; i < n; i++) {
+        if (ans.empty() || nums[i][0] > ans.back()[1]) {
+            // No overlap — add new interval
+            ans.push_back(nums[i]);
+        } else {
+            // Overlap — merge with last interval
+            ans.back()[1] = max(ans.back()[1], nums[i][1]);
+        }
+    }
+
+    return ans;
+}
+
+
+int main(){
+    
+    return 0;
+}
