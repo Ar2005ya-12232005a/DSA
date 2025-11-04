@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+
+
+
+int SubarraySumKXOR(vector<int> &arr, int k){
+    int count = 0;
+    for(int i = 0; i<arr.size();i++){
+        int XOR = 0;
+        
+        for(int j = i; j< arr.size();j++){
+            XOR = XOR^ arr[j];
+
+             if(XOR == k){
+            count++;
+        }
+
+    }
+
+       
+    }
+
+    return count;
+}
+
+
+
+int SubarraySumKXOR2(vector<int> &arr, int k){
+    int count = 0;
+    int XR = 0;
+    int n =  arr.size();
+
+    map <int, int> mpp;
+    mpp[XR]++;
+
+
+    for(int i = 0; i<n; i++){
+        XR = XR^ arr[i];
+
+        int x = XR ^ k;
+        count += mpp[x];
+    }
+
+    return count;
+}
+
+
+
+
+
+int main(){
+    
+    return 0;
+}
