@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+
+
+//--------------------------------BRUTE FORCE--------------------------
+
+int CountInversions(vector <int> &arr){
+    
+        int count = 0;
+    for(int i = 0; i< arr.size(); i++){
+
+        for(int j = i; j< arr.size(); j++){
+
+            if(arr[i]> arr[j]){
+                count++;
+            }
+
+        }
+
+    }
+
+    return count;
+}
+
+
+
+
+
+
+
+
+
+//------------------------------------OPTIMAL-------------------------
+
+int merge(vector<int> &arr,int low, int mid,int high){
+
+    vector <int> temp;
+
+    int left = low;
+    int right = mid+1;
+    int count = 0;
+
+    while(left<=mid && right<= high){
+       
+        if(arr[left] <= arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else{
+            temp.push_back(arr[right]);
+            count +=  (mid-left)+1;
+            right++;
+        }
+
+    }
+
+    while(left <= mid){
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    while(right<= high){
+        temp.push_back(arr[right]);
+    }
+
+
+    for(int i = 0; i<arr.size(); i++){
+        arr[low + i] = temp[i];
+        right++;
+
+    }
+
+    return count;
+}
+
+
+int mS(vector <int> &arr, int low,  int high){
+    int count = 0;
+    if(low == high) return count;
+    int mid = (low + high)/2;
+   count += mS(arr, low, mid);
+    count += mS(arr,mid+1, high);
+    count += merge(arr,low, mid, high);
+    return count;
+
+}
+
+vector <int> mergeSort(vector <int> &arr, int n){
+
+    mS(arr,0, n-1);
+}
+
+int main(){
+    
+    return 0;
+}
