@@ -1,0 +1,127 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+//----------------------------BRUTE FORCE-----------------------
+
+void merge(long long arr1[],long long arr2[], int n, int m){
+    long long arr3[n+m];
+    int left = 0;
+    int right = 0;
+    int index = 0;
+    
+    while(left <n and right <m){
+        if(arr1[left] < arr2[right]){
+            arr3[index++] = arr1[left++];
+      
+        }
+
+        else if(arr1[left]> arr2[right]){
+            arr3[index++] = arr2[right++];
+        
+        }
+    }
+
+    while(left <n){
+        arr3[index] = arr1[left];
+        left++, index++;
+    }
+
+    while(right <m){
+        arr3[index] = arr2[right];
+        right++, index++;
+    }
+
+
+
+    for(int i = 0; i< n+m; i++){
+        if(i<n){
+            arr1[i] = arr3[i];
+        }
+
+        else{
+            arr2[i-n] = arr3[i];
+        }
+    }
+}
+
+
+
+
+
+//-------------------------------OPTIMAL 1---------------------------
+
+
+void merge(long long arr1[],long long arr2[], int n, int m){
+
+    int left = n-1;
+    int right = 0;
+
+    while(left >= 0 && right < m){
+        if(arr1[left] > arr2[right]){
+            swap(arr1[left], arr2[right]);
+            left--, right++;
+        }
+
+        else{
+            break;
+        }
+
+
+    }
+
+    sort(arr1, arr1+n);
+    sort(arr2, arr2+m);
+
+}
+
+
+
+
+//-----------------------------------OPTIMAL 2 (GAP METHOD)--------------------
+
+void SwapifGreater(long long arr1[], long long arr2[], int index1, int index2){
+
+    if(arr1[index1] > arr2[index2]){
+        swap(arr1[index1], arr2[index2]);
+    }
+
+}
+
+void merge(long long arr1[],long long arr2[], int n, int m){
+    int length = n+m;
+    int gap = (length/2) + (length% 2);
+
+    while(gap >0){
+        int left = 0;
+        int right = left+gap;
+
+        while(right < length){
+            if(left <n && right >= n){
+                SwapifGreater(arr1, arr2, left, right-n);
+
+            }
+
+            else if(left >= n){
+                SwapifGreater(arr2, arr2, left-n, right-n);
+            }
+
+            else{
+                SwapifGreater(arr1, arr1, left , right);
+            }
+             left++, right++;
+        }
+
+        if(gap == 1){
+            break;
+           
+        }
+         gap = (gap/2)+ (gap%2);
+       
+    }
+}
+
+int main(){
+
+}
