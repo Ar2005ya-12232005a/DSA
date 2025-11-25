@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+int MinimumRotatedSortedArray(vector <int> &arr, int n){
+    int low = 0;
+    int high = n-1;
+    int ans = INT_MAX;
+    int index = -1;
+    int mid = low + (high - low)/2;
+
+    while(low <= high){
+        if(arr[low] <= arr[high]){
+           if(arr[low] <ans){
+            index = low;
+            ans = arr[low];
+           }
+            break;
+        }
+
+        else if(arr[low] <= mid){
+            if(arr[low] <ans){
+                index = low;
+            ans = arr[low];
+           }
+            low = mid+1;
+        }
+
+        else{
+          if(arr[mid] <ans){
+            index = mid;
+            ans = arr[mid];
+           }
+            high = mid-1;
+        }
+    }
+
+    return index;
+}
+
+int main(){
+
+}
