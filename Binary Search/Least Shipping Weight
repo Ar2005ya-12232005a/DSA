@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+int NoOfdays(vector <int> &arr,int capacity){
+    int day = 1;
+    int load = 0;
+    for(int i = 0; i< arr.size(); i++){
+        if(load + arr[i] > capacity){
+            day += 1;
+            load = arr[i];
+        }
+        else{
+            load += arr[i];
+
+        }
+    }
+
+    return day;
+
+}
+
+
+int LeastWeight(vector <int> &arr, int day){
+    int low = *max_element(arr.begin(),arr.end());
+    int high = accumulate(arr.begin(),arr.end(),0);
+
+    while(low <= high){
+        int mid = low + (high-low)/2;
+
+        int totalDay = NoOfdays(arr,mid);
+        if(totalDay <= day){
+            high = mid-1;
+
+
+        }
+        else{
+            low = mid+1;
+        }
+    }
+    return low;
+
+
+}
+
+
+int main(){
+
+}
