@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+string reverseWords(string str) {
+    string result = "";
+    int end = str.length() - 1;
+
+    while (end >= 0) {
+        // Skip trailing spaces
+        while (end >= 0 && str[end] == ' ') end--;
+
+        if (end < 0) break;
+
+        // Find the start of the current word
+        int start = end;
+        while (start >= 0 && str[start] != ' ') start--;
+
+        // Extract the word and add to result
+        string word = str.substr(start + 1, end - start);
+        if (!result.empty())
+            result += " ";
+        result += word;
+
+        // Move to the previous word
+        end = start - 1;
+    }
+
+    return result;
+}
